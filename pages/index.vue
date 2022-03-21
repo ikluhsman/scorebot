@@ -1,6 +1,6 @@
 <template>
   <div>
-      <score-card ref="scoreCard"/>
+    <score-card ref="scoreCard" />
   </div>
 </template>
 <script>
