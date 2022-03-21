@@ -4,7 +4,7 @@
       <div class="text-center px-1 text-ellipsis whitespace-nowrap">
         <span>{{ player }}</span>
       </div>
-      <div :class="total >= goal ? 'w-2/3 border-gray-500 border-solid bg-lime-600 border text-lime-300 text-center' : 'w-2/3 border-gray-500 border-solid border text-lime-300 text-center'">
+      <div :class="total >= goal && goal !== 0 ? 'w-2/3 border-gray-500 border-solid bg-lime-600 border text-lime-300 text-center' : 'w-2/3 border-gray-500 border-solid border text-lime-300 text-center'">
         {{ total }}
       </div>
     </div>
@@ -22,10 +22,10 @@
       <score-item
         v-for="(r,k) in rounds"
         :key="k"
+        :ref="'scoreItem' + k"
         class="px-2 w-full"
         :item-index="k"
         :value="r"
-        @clearSelectedScoreEntries="clearSelectedScoreEntries"
         @deleteScoreItem="deleteScoreItem"
       />
     </div>
@@ -89,9 +89,6 @@ export default {
     deleteScoreItem (itemIndex) {
       this.rounds.splice(itemIndex, 1)
       this.$emit('totalsUpdated')
-    },
-    clearSelectedScoreEntries () {
-
     }
   }
 }
