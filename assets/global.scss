@@ -1,0 +1,12 @@
+body {
+    @apply text-amber-50 text-lg bg-black m-0;
+    letter-spacing: 0.025em;
+    font-family: mono45-headline,monospace;
+    font-weight: 500;
+    font-style: normal;
+}
+a {
+    @apply text-lime-300;
+    text-decoration-line: none;
+    cursor: pointer;
+}
