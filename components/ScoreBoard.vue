@@ -1,10 +1,10 @@
 <template>
-  <div id="score-board" class="text-sm bg-gray-900 text-lime-300 w-full p-4 z-10">
+  <div id="score-board" class="bg-gray-900 text-lime-300 w-full p-4 z-10">
     <div class="flex justify-between items-start pb-2">
       <div>{{ datetime }}<br>{{ game }}</div>
       <div>
         <div class="flex gap-4">
-          <span>Winning-Goal </span><input id="goal" class="w-8 bg-transparent" autocomplete="off" :value="goal" @change="changeGoal"></input>
+          <span>Goal </span><input id="goal" class="w-8 bg-transparent" autocomplete="off" :value="goal" @change="changeGoal"></input>
         </div>
         <div>
           Current Leader: {{ leaders }}
