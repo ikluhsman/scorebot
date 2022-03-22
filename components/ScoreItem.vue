@@ -31,8 +31,9 @@ export default {
       this.isSelected = !this.isSelected
     },
     clickOutside (e) {
-      console.log(e)
-      this.isSelected = false
+      if (this.isSelected) {
+        this.isSelected = false
+      }
     }
   }
 }
