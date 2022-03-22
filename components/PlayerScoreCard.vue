@@ -1,8 +1,17 @@
 <template>
   <div class="flex flex-col gap-2 w-full pt-4">
     <div class="flex flex-col items-center">
-      <div class="text-center px-1 text-ellipsis whitespace-nowrap">
-        <span>{{ player }}</span>
+      <div class="text-center px-1 text-ellipsis whitespace-nowrap" @dblclick="playerDoubleClick">
+        <input
+          v-if="playerEdit"
+          ref="playerNameTextBox"
+          v-model="player"
+          v-focus
+          v-click-outside="updatePlayer"
+          class="bg-gray-800 text-amber-50"
+          @keyup.enter="updatePlayer"
+        >
+        <span v-else>{{ player }}</span>
       </div>
       <div :class="total >= goal && goal !== 0 ? 'w-2/3 border-gray-500 border-solid bg-lime-600 border text-lime-300 text-center' : 'w-2/3 border-gray-500 border-solid border text-lime-300 text-center'">
         {{ total }}
@@ -34,7 +43,7 @@
 <script>
 export default {
   props: {
-    player: {
+    playerName: {
       type: String,
       required: true
     },
@@ -49,7 +58,9 @@ export default {
   },
   data () {
     return {
-      rounds: []
+      rounds: [],
+      playerEdit: false,
+      player: null
     }
   },
   computed: {
@@ -62,6 +73,9 @@ export default {
       }
       return points
     }
+  },
+  created () {
+    this.player = this.playerName
   },
   methods: {
     addRound (score) {
@@ -89,6 +103,15 @@ export default {
     deleteScoreItem (itemIndex) {
       this.rounds.splice(itemIndex, 1)
       this.$emit('totalsUpdated')
+    },
+    updatePlayer (e) {
+      if (this.playerEdit) {
+        this.$emit('updatePlayer', this.playerIndex, this.player)
+        this.playerEdit = false
+      }
+    },
+    playerDoubleClick (e) {
+      this.playerEdit = !this.playerEdit
     }
   }
 }

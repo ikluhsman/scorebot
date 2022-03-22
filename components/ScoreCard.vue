@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-12 flex flex-col items-center">
+  <div class="mt-12 flex flex-col items-center h-screen">
     <score-board
       :key="'scoreBoard'"
       :players="players"
@@ -14,10 +14,11 @@
         v-for="(p, k) in players"
         :ref="'playerScoreCard' + k"
         :key="k"
-        :player="p"
+        :player-name="p"
         :player-index="k"
         :goal="goal"
-        @totalsUpdated="updatedCardTotals"
+        @totalsUpdated="updateTotals"
+        @updatePlayer="updatePlayer"
       />
     </div>
   </div>
@@ -98,9 +99,6 @@ export default {
         this.goal = pointNum
       }
     },
-    updatedCardTotals () {
-      this.updateTotals()
-    },
     arrayMax (arr) {
       let len = arr.length; let max = -Infinity
       while (len--) {
@@ -134,7 +132,6 @@ export default {
         goal: this.goal,
         scores
       }
-      console.log(scoredata)
       const scoresJson = JSON.stringify(scoredata)
       const buff = Buffer.from(scoresJson)
       const b64 = buff.toString('base64')
@@ -153,8 +150,11 @@ export default {
     },
     addPlayer () {
       const newPlayer = 'Player' + this.players.length
-
       this.players.push(newPlayer)
+    },
+    updatePlayer (playerIndex, newPlayerName) {
+      this.players[playerIndex] = newPlayerName
+      this.updateTotals()
     }
   }
 }
