@@ -1,23 +1,34 @@
 <template>
   <div class="flex flex-col gap-2 pt-4">
     <div class="flex flex-col items-center">
-      <div class="text-center px-1">
-        <input
-          v-if="playerEdit"
-          ref="playerNameTextBox"
-          v-model="player"
-          v-focus
-          v-click-outside="updatePlayer"
-          class="bg-gray-800 text-amber-50 w-20"
-          @keyup.enter="updatePlayer"
-        >
-        <span v-else :id="'player-' + playerIndex + '-span'" class="whitespace-nowrap text-sm md:text-base" @click="editPlayer">{{ player }}</span>
+      <div class="h-2 mb-2">
+        <svg v-show="total >= goal && goal !== 0 && goal !== null" style="width:16px;height:16px" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
+        </svg>
       </div>
-      <div :class="total >= goal && goal !== 0 ? 'w-2/3 border-gray-500 border-solid bg-lime-600 border text-lime-300 text-center' : 'w-2/3 border-gray-500 border-solid border text-lime-300 text-center'">
+      <div class="text-center px-1">
+        <div v-if="playerEdit" class=" flex flex-nowrap">
+          <input
+            ref="playerNameTextBox"
+            v-model="player"
+            v-focus
+            v-click-outside="updatePlayer"
+            class="bg-gray-800 text-amber-50 w-20 text-center"
+            @keyup.enter="updatePlayer"
+          >
+          <button class="p-1" @click="showRemovePlayerDialog = true">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+          </button>
+        </div>
+        <span v-else :id="'player-' + playerIndex + '-span'" class="whitespace-nowrap text-sm sm:text-lg" @click="editPlayer">{{ player }}</span>
+      </div>
+      <div :class="isLeader ? 'w-2/3 text-center border-gray-500 border-solid border rounded-md text-lime-300 bg-lime-600' : 'w-2/3 text-center border-gray-500 border-solid border rounded-md text-lime-300'">
         {{ total }}
       </div>
     </div>
-    <div class="bg-black flex flex-nowrap flex-col items-center border-gray-400 border">
+    <div class="bg-black flex flex-nowrap flex-col items-center">
       <div class="text-center w-full">
         <input
           :id="'score-' + player"
@@ -38,6 +49,7 @@
         @deleteScoreItem="deleteScoreItem"
       />
     </div>
+    <remove-player-dialog v-if="showRemovePlayerDialog" :player="playerName" :player-index="playerIndex" @closeModal="closeRemovePlayerDialog" />
   </div>
 </template>
 <script>
@@ -60,7 +72,9 @@ export default {
     return {
       rounds: [],
       playerEdit: false,
-      player: null
+      player: null,
+      showRemovePlayerDialog: false,
+      isLeader: false
     }
   },
   computed: {
@@ -78,6 +92,12 @@ export default {
     this.player = this.playerName
   },
   methods: {
+    closeRemovePlayerDialog (response, playerIndex) {
+      this.showRemovePlayerDialog = false
+      if (response) {
+        this.$emit('removePlayer', playerIndex)
+      }
+    },
     editPlayer () {
       this.playerEdit = true
     },
@@ -86,18 +106,11 @@ export default {
     },
     scoreEntryKeyDown (k) {
       if (k.key === 'Enter') {
-        // check value
-        const regExp = /[a-zA-Z]/g
-        if (regExp.test(this.$refs.scoreInput.value)) {
-          /* if letters are found in your string */
-          alert('Score must be a non-zero, positive, or negative number.')
-          return
-        }
-        const pointNum = parseInt(this.$refs.scoreInput.value)
-        if (isNaN(pointNum) || pointNum === 0) {
+        const isNumbersValue = this.$isStringOnlyNumbers(this.$refs.scoreInput.value)
+        if (!isNumbersValue) {
           alert('Score must be a non-zero, positive, or negative number.')
         } else {
-          this.addRound(pointNum)
+          this.addRound(isNumbersValue)
         }
         this.$refs.scoreInput.value = null
         this.$emit('totalsUpdated')
