@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-12 flex flex-col items-center h-screen">
+  <div class="mt-12 h-screen">
     <score-board
       :key="'scoreBoard'"
       :players="players"
@@ -8,8 +8,9 @@
       :datetime="datetime"
       :leaders="getLeaders"
       @changeGoal="changeGoal"
+      @changeGame="changeGame"
     />
-    <div class="w-5/6 flex justify-center px-2">
+    <div class="flex flex-wrap justify-center mb-4 gap-2 flex-grow-0">
       <player-score-card
         v-for="(p, k) in players"
         :ref="'playerScoreCard' + k"
@@ -17,10 +18,17 @@
         :player-name="p"
         :player-index="k"
         :goal="goal"
+        class="w-1/6"
         @totalsUpdated="updateTotals"
         @updatePlayer="updatePlayer"
       />
     </div>
+    <reset-dialog v-if="showResetDialog" @closeModal="closeResetDialog" />
+    <share-dialog
+      v-if="showShareDialog"
+      :link="saveLink"
+      @closeModal="closeShareDialog"
+    />
   </div>
 </template>
 <script>
@@ -34,7 +42,7 @@ export default {
   },
   data () {
     const datetime = moment().format('M/D/YYYY hh:mm')
-    const game = 'Rum 500 Variation'
+    const game = 'New Game'
     const goal = 0
     const players = []
     const totals = []
@@ -43,12 +51,17 @@ export default {
       game,
       players,
       goal,
-      totals
+      totals,
+      maxplayers: 40,
+      showResetDialog: false,
+      showShareDialog: false,
+      saveLink: null
     }
   },
   computed: {
     getLeaders () {
       const max = Math.max(...this.totals)
+      if (max === 0) { return null }
       const indexes = []
       for (let i = 0; i < this.totals.length; i++) {
         if (this.totals[i] === max) {
@@ -85,6 +98,19 @@ export default {
     this.updateTotals()
   },
   methods: {
+    closeResetDialog (response) {
+      this.showResetDialog = false
+      if (response) {
+        this.datetime = moment().format('M/D/YYYY hh:mm')
+        this.goal = 0
+        this.players = []
+        this.game = 'New Game'
+        this.$router.push('/')
+      }
+    },
+    closeShareDialog () {
+      this.showShareDialog = false
+    },
     changeGoal (value) {
       const regExp = /[a-zA-Z]/g
       const alertMsg = 'Score must be a non-zero, positive, or negative number.'
@@ -99,14 +125,10 @@ export default {
         this.goal = pointNum
       }
     },
-    arrayMax (arr) {
-      let len = arr.length; let max = -Infinity
-      while (len--) {
-        if (arr[len] > max) {
-          max = arr[len]
-        }
+    changeGame (value) {
+      if (value !== this.game) {
+        this.game = value
       }
-      return max
     },
     updateTotals () {
       if (this.players) {
@@ -119,12 +141,24 @@ export default {
         })
       }
     },
-    generateGameData () {
+    save (redirect) {
       const scores = []
       this.players.forEach((p, k) => {
         const sc = this.$refs['playerScoreCard' + k]
         scores.push(sc[0].rounds)
       })
+      if (scores.length === 0) {
+        alert('No players on the board. Add players to the board first.')
+        return false
+      }
+      const scoreRecords = scores.filter((s) => {
+        if (s.length > 0) { return true }
+        return false
+      })
+      if (scoreRecords.length === 0) {
+        alert('No scores for any players, add some scores first.')
+        return false
+      }
       const scoredata = {
         datetime: this.datetime,
         game: this.game,
@@ -135,20 +169,26 @@ export default {
       const scoresJson = JSON.stringify(scoredata)
       const buff = Buffer.from(scoresJson)
       const b64 = buff.toString('base64')
-      const url = 'https://scorebot.app/scores?id=' + b64
-      this.$router.push({ path: '/scores', query: { id: b64 } })
-      return url
+      const url = 'http://localhost:3000/scores?id=' + b64
+      if (redirect) {
+        this.$router.push({ path: '/scores', query: { id: b64 } })
+      }
+      return { url, b64 }
     },
-    generateGameLink () {
-      const url = this.generateGameData()
-      alert(url)
+    share () {
+      this.saveLink = this.save(false)
+      if (this.saveLink !== false) {
+        this.showShareDialog = true
+      }
     },
-    clear () {
-      this.datetime = moment().format('M/D/YYYY hh:mm')
-      this.goal = 0
-      this.players = []
+    reset () {
+      this.showResetDialog = true
     },
     addPlayer () {
+      if (this.players.length === this.maxplayers) {
+        alert('Max of 40 players.')
+        return
+      }
       const newPlayer = 'Player' + this.players.length
       this.players.push(newPlayer)
     },
