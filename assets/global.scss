@@ -12,5 +12,9 @@ a {
 }
 .share-link {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 0.9rem
+    font-size: 0.9rem;
+}
+
+input {
+    @apply border border-amber-50 bg-transparent pl-2 rounded-md;
 }
