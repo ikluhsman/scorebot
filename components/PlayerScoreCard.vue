@@ -1,17 +1,17 @@
 <template>
-  <div class="flex flex-col gap-2 w-full pt-4">
+  <div class="flex flex-col gap-2 pt-4">
     <div class="flex flex-col items-center">
-      <div class="text-center px-1 text-ellipsis whitespace-nowrap" @dblclick="playerDoubleClick">
+      <div class="text-center px-1">
         <input
           v-if="playerEdit"
           ref="playerNameTextBox"
           v-model="player"
           v-focus
           v-click-outside="updatePlayer"
-          class="bg-gray-800 text-amber-50"
+          class="bg-gray-800 text-amber-50 w-20"
           @keyup.enter="updatePlayer"
         >
-        <span v-else>{{ player }}</span>
+        <span v-else :id="'player-' + playerIndex + '-span'" class="whitespace-nowrap text-sm md:text-base" @click="editPlayer">{{ player }}</span>
       </div>
       <div :class="total >= goal && goal !== 0 ? 'w-2/3 border-gray-500 border-solid bg-lime-600 border text-lime-300 text-center' : 'w-2/3 border-gray-500 border-solid border text-lime-300 text-center'">
         {{ total }}
@@ -78,6 +78,9 @@ export default {
     this.player = this.playerName
   },
   methods: {
+    editPlayer () {
+      this.playerEdit = true
+    },
     addRound (score) {
       this.rounds.push(score)
     },
@@ -105,13 +108,10 @@ export default {
       this.$emit('totalsUpdated')
     },
     updatePlayer (e) {
-      if (this.playerEdit) {
+      if (e.target.id !== 'player-' + this.playerIndex + '-span') {
         this.$emit('updatePlayer', this.playerIndex, this.player)
         this.playerEdit = false
       }
-    },
-    playerDoubleClick (e) {
-      this.playerEdit = !this.playerEdit
     }
   }
 }
