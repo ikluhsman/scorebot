@@ -3,10 +3,10 @@
 </template>
 <script>
 export default {
-  asyncData ({ query }) {
+  async asyncData ({ query }) {
     let jsonData = ''
     if (query.id) {
-      const b = Buffer.from(query.id, 'base64').toString()
+      const b = await Buffer.from(query.id, 'base64').toString()
       jsonData = JSON.parse(b)
     }
     return {
