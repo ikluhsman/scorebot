@@ -1,12 +1,3 @@
 <template>
-  <div>
-    <score-card ref="scoreCard" />
-  </div>
+  <score-card />
 </template>
-<script>
-export default {
-  mounted () {
-    this.$refs.scoreCard.clear()
-  }
-}
-</script>
