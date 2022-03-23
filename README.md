@@ -1,68 +1,19 @@
 # scorebot
 
-## Build Setup
+Scorebot is an easy-to-use score card for keeping score of card games, darts, dominoes, dice, or any other game where you keep a basic running total of points. The demo is available at [https://scorebot.app](https://scorebot.app). 
 
-```bash
-# install dependencies
-$ yarn install
+1. When you get to the page you'll find a blank scoreboard.
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+1. Click the user with the + sign in the upper-right corner to add players to the score board.
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+1. Enter scores for each player.
 
-# generate static project
-$ yarn generate
-```
+1. When you're done with the game, click the save button on the button bar. A link will be generated so you can re-load your game later. Keep the link in case you want to remember your game.
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+Tips:
 
-## Special Directories
-
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+* You can double-click each player name to change the name of the players, click on the game name to change it, or click on goal to change the winning point goal.
+* As you enter scores, the current leader will be shown and if you have set a winning goal, the winner will be highlighted when they reach the goal.
+* The winner can gloat by saving a link and sharing it on social media with other players.
+* Make sure to save frequently, and keep the link to the final game somewhere so you can get back to it easily.
+* CAUTION: If you refresh your browser your game will revert back to the last saved snapshot. Save frequently!
