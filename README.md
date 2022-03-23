@@ -12,8 +12,8 @@ Scorebot is an easy-to-use score card for keeping score of card games, darts, do
 
 Tips:
 
-* You can double-click each player name to change the name of the players, click on the game name to change it, or click on goal to change the winning point goal.
-* As you enter scores, the current leader will be shown and if you have set a winning goal, the winner will be highlighted when they reach the goal.
+* Click each player name to change the name of the players, click on the game name to change it, or click on goal to change the winning point goal.
+* As scores are entered, the current leader will be shown and if you have set a winning goal, the winner will be highlighted when they reach the goal.
 * The winner can gloat by saving a link and sharing it on social media with other players.
 * Make sure to save frequently, and keep the link to the final game somewhere so you can get back to it easily.
-* CAUTION: If you refresh your browser your game will revert back to the last saved snapshot. Save frequently!
+* CAUTION: Refreshing the browser will cause the score card to revert back to the last saved snapshot. Save frequently!
