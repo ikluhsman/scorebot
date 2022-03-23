@@ -6,9 +6,8 @@
       :goal="goal"
       :game="game"
       :datetime="datetime"
-      :leaders="getLeaders"
-      @changeGoal="changeGoal"
-      @changeGame="changeGame"
+      @updateGoal="updateGoal"
+      @updateGame="updateGame"
     />
     <div class="flex flex-wrap justify-center mb-4 gap-2 flex-grow-0">
       <player-score-card
@@ -21,14 +20,11 @@
         class="w-1/6"
         @totalsUpdated="updateTotals"
         @updatePlayer="updatePlayer"
+        @removePlayer="removePlayer"
       />
     </div>
     <reset-dialog v-if="showResetDialog" @closeModal="closeResetDialog" />
-    <share-dialog
-      v-if="showShareDialog"
-      :link="saveLink"
-      @closeModal="closeShareDialog"
-    />
+    <share-dialog v-if="showShareDialog" :link="saveLink" @closeModal="closeShareDialog" />
   </div>
 </template>
 <script>
@@ -59,21 +55,7 @@ export default {
     }
   },
   computed: {
-    getLeaders () {
-      const max = Math.max(...this.totals)
-      if (max === 0) { return null }
-      const indexes = []
-      for (let i = 0; i < this.totals.length; i++) {
-        if (this.totals[i] === max) {
-          indexes.push(i)
-        }
-      }
-      let playersText = ''
-      indexes.forEach((i, k) => {
-        playersText += this.players[i] + ((indexes.length > 1 && k + 1 < indexes.length) ? ',' : '')
-      })
-      return playersText
-    }
+
   },
   created () {
     if (this.jsonData != null) {
@@ -111,21 +93,16 @@ export default {
     closeShareDialog () {
       this.showShareDialog = false
     },
-    changeGoal (value) {
-      const regExp = /[a-zA-Z]/g
-      const alertMsg = 'Score must be a non-zero, positive, or negative number.'
-      if (regExp.test(value)) {
-        alert(alertMsg)
-        return
-      }
-      const pointNum = parseInt(value)
-      if (isNaN(pointNum) || pointNum === 0) {
+    updateGoal (value) {
+      const isNumbersValue = this.$isStringOnlyNumbers(value)
+      if (isNumbersValue === false) {
+        const alertMsg = 'Score must be a non-zero, positive, or negative number.'
         alert(alertMsg)
       } else {
-        this.goal = pointNum
+        this.goal = isNumbersValue
       }
     },
-    changeGame (value) {
+    updateGame (value) {
       if (value !== this.game) {
         this.game = value
       }
@@ -139,6 +116,17 @@ export default {
             this.totals.push(sc[0].total)
           }
         })
+        this.updateLeaders()
+      }
+    },
+    updateLeaders () {
+      const max = Math.max(...this.totals)
+      if (max === 0) { return null }
+      for (let i = 0; i < this.totals.length; i++) {
+        this.$refs['playerScoreCard' + i][0].isLeader = false
+        if (this.totals[i] === max) {
+          this.$refs['playerScoreCard' + i][0].isLeader = true
+        }
       }
     },
     save (redirect) {
@@ -149,14 +137,6 @@ export default {
       })
       if (scores.length === 0) {
         alert('No players on the board. Add players to the board first.')
-        return false
-      }
-      const scoreRecords = scores.filter((s) => {
-        if (s.length > 0) { return true }
-        return false
-      })
-      if (scoreRecords.length === 0) {
-        alert('No scores for any players, add some scores first.')
         return false
       }
       const scoredata = {
@@ -194,6 +174,11 @@ export default {
     },
     updatePlayer (playerIndex, newPlayerName) {
       this.players[playerIndex] = newPlayerName
+      this.updateTotals()
+    },
+    removePlayer (playerIndex) {
+      this.showRemovePlayerDialog = true
+      this.players.splice(playerIndex, 1)
       this.updateTotals()
     }
   }
