@@ -94,12 +94,12 @@ export default {
       this.showShareDialog = false
     },
     updateGoal (value) {
-      const isNumbersValue = this.$isStringOnlyNumbers(value)
-      if (isNumbersValue === false) {
+      const pointNum = Number(value)
+      if (!pointNum && pointNum !== 0) {
         const alertMsg = 'Score must be a non-zero, positive, or negative number.'
         alert(alertMsg)
       } else {
-        this.goal = isNumbersValue
+        this.goal = pointNum
       }
     },
     updateGame (value) {

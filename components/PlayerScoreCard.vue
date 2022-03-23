@@ -24,7 +24,7 @@
         </div>
         <span v-else :id="'player-' + playerIndex + '-span'" class="whitespace-nowrap text-sm sm:text-lg" @click="editPlayer">{{ player }}</span>
       </div>
-      <div :class="isLeader ? 'w-2/3 text-center border-gray-500 border-solid border rounded-md text-lime-300 bg-lime-600' : 'w-2/3 text-center border-gray-500 border-solid border rounded-md text-lime-300'">
+      <div :class="isLeader ? 'w-full text-center border-gray-500 border-solid border rounded-md text-lime-300 bg-lime-600' : 'w-full text-center border-gray-500 border-solid border rounded-md text-lime-300'">
         {{ total }}
       </div>
     </div>
@@ -33,7 +33,7 @@
         <input
           :id="'score-' + player"
           ref="scoreInput"
-          class="w-full bg-gray-900/80 text-lime-300 text-center"
+          class="w-full bg-gray-900/80 text-lime-300"
           autocomplete="off"
           type="text"
           @keydown="scoreEntryKeyDown"
@@ -106,11 +106,11 @@ export default {
     },
     scoreEntryKeyDown (k) {
       if (k.key === 'Enter') {
-        const isNumbersValue = this.$isStringOnlyNumbers(this.$refs.scoreInput.value)
-        if (!isNumbersValue) {
+        const pointNum = Number(this.$refs.scoreInput.value)
+        if (isNaN(pointNum)) {
           alert('Score must be a non-zero, positive, or negative number.')
         } else {
-          this.addRound(isNumbersValue)
+          this.addRound(pointNum)
         }
         this.$refs.scoreInput.value = null
         this.$emit('totalsUpdated')
