@@ -1,6 +1,18 @@
 # scorebot
 
-Scorebot is an easy-to-use score card for keeping score of card games, darts, dominoes, dice, or any other game where you keep a basic running total of points. The demo is available at [https://scorebot.app](https://scorebot.app). 
+Scorebot is an app for keeping score of card games, darts, dominoes, dice, or any other game where you keep a basic running total of points. It is easy to use on a tablet or cell phone at the game table.
+
+The app is available at [https://scorebot.app](https://scorebot.app), and it is a PWA that is a web app but acts like a phone app.
+
+Install
+
+1. Visit https://scorebot.app
+
+1. Click the ellipses in the top-right corner of the browser, then choose "Install ScoreBot"
+
+1. A desktop shortcut will be installed on your device.
+
+Usage
 
 1. When you get to the page you'll find a blank scoreboard.
 
@@ -13,7 +25,7 @@ Scorebot is an easy-to-use score card for keeping score of card games, darts, do
 Tips:
 
 * Click each player name to change the name of the players, click on the game name to change it, or click on goal to change the winning point goal.
-* As scores are entered, the current leader will be shown and if you have set a winning goal, the winner will be highlighted when they reach the goal.
-* The winner can gloat by saving a link and sharing it on social media with other players.
+* As scores are entered, the current leader will be shown highlighted in green. If you have set a winning goal, the winner(s) will be highlighted when they reach the goal.
+* The winners can gloat by saving a link and sharing it on social media with other players.
 * Make sure to save frequently, and keep the link to the final game somewhere so you can get back to it easily.
 * CAUTION: Refreshing the browser will cause the score card to revert back to the last saved snapshot. Save frequently!
