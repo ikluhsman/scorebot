@@ -175,11 +175,15 @@ export default {
     updatePlayer (playerIndex, newPlayerName) {
       this.players[playerIndex] = newPlayerName
       this.updateTotals()
+      console.log(this.players)
     },
     removePlayer (playerIndex) {
-      this.showRemovePlayerDialog = true
       this.players.splice(playerIndex, 1)
       this.updateTotals()
+      this.players.forEach((p, k) => {
+        const sc = this.$refs['playerScoreCard' + k]
+        console.log(sc[0].playerName, sc[0].player, sc[0].playerIndex, sc[0].rounds)
+      })
     }
   }
 }

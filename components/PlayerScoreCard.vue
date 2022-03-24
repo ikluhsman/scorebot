@@ -10,10 +10,10 @@
         <div v-if="playerEdit" class=" flex flex-nowrap">
           <input
             ref="playerNameTextBox"
-            v-model="player"
+            v-model="newPlayerName"
             v-focus
             v-click-outside="updatePlayer"
-            class="bg-gray-800 text-amber-50 w-20 text-center"
+            class="bg-gray-800 text-amber-50 w-20 text-left"
             @keyup.enter="updatePlayer"
           >
           <button class="p-1" @click="showRemovePlayerDialog = true">
@@ -22,7 +22,7 @@
             </svg>
           </button>
         </div>
-        <span v-else :id="'player-' + playerIndex + '-span'" class="whitespace-nowrap text-sm sm:text-lg" @click="editPlayer">{{ player }}</span>
+        <span v-else :id="'player-' + playerIndex + '-span'" class="whitespace-nowrap text-sm sm:text-lg" @click="editPlayer">{{ playerName }}</span>
       </div>
       <div :class="isLeader ? 'w-full text-center border-gray-500 border-solid border rounded-md text-lime-300 bg-lime-600' : 'w-full text-center border-gray-500 border-solid border rounded-md text-lime-300'">
         {{ total }}
@@ -31,7 +31,7 @@
     <div class="bg-black flex flex-nowrap flex-col items-center">
       <div class="text-center w-full">
         <input
-          :id="'score-' + player"
+          :id="'score-' + playerName"
           ref="scoreInput"
           class="w-full bg-gray-900/80 text-lime-300"
           autocomplete="off"
@@ -49,7 +49,7 @@
         @deleteScoreItem="deleteScoreItem"
       />
     </div>
-    <remove-player-dialog v-if="showRemovePlayerDialog" :player="playerName" :player-index="playerIndex" @closeModal="closeRemovePlayerDialog" />
+    <remove-player-dialog v-if="showRemovePlayerDialog" :player="playerName" @closeModal="closeRemovePlayerDialog" />
   </div>
 </template>
 <script>
@@ -72,7 +72,7 @@ export default {
     return {
       rounds: [],
       playerEdit: false,
-      player: null,
+      newPlayerName: null,
       showRemovePlayerDialog: false,
       isLeader: false
     }
@@ -89,15 +89,9 @@ export default {
     }
   },
   created () {
-    this.player = this.playerName
+    this.newPlayerName = this.playerName
   },
   methods: {
-    closeRemovePlayerDialog (response, playerIndex) {
-      this.showRemovePlayerDialog = false
-      if (response) {
-        this.$emit('removePlayer', playerIndex)
-      }
-    },
     editPlayer () {
       this.playerEdit = true
     },
@@ -120,8 +114,14 @@ export default {
     },
     updatePlayer (e) {
       if (e.target.id !== 'player-' + this.playerIndex + '-span') {
-        this.$emit('updatePlayer', this.playerIndex, this.player)
+        this.$emit('updatePlayer', this.playerIndex, this.newPlayerName)
         this.playerEdit = false
+      }
+    },
+    closeRemovePlayerDialog (response) {
+      this.showRemovePlayerDialog = false
+      if (response) {
+        this.$emit('removePlayer', this.index)
       }
     }
   }

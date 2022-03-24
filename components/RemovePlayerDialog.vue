@@ -32,18 +32,14 @@ export default {
     player: {
       type: String,
       required: true
-    },
-    playerIndex: {
-      type: Number,
-      required: true
     }
   },
   methods: {
     close () {
-      this.$emit('closeModal', false, this.playerIndex)
+      this.$emit('closeModal', false)
     },
     yes () {
-      this.$emit('closeModal', true, this.playerIndex)
+      this.$emit('closeModal', true)
     }
   }
 }
