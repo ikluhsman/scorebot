@@ -36,7 +36,7 @@
           class="w-full bg-gray-900/80 text-lime-300"
           autocomplete="off"
           type="text"
-          @keydown="scoreEntryKeyDown"
+          @keyup.enter="scoreEntryKeyUp"
         ></input>
       </div>
       <score-item
@@ -104,17 +104,15 @@ export default {
     addRound (score) {
       this.rounds.push(score)
     },
-    scoreEntryKeyDown (k) {
-      if (k.key === 'Enter') {
-        const pointNum = Number(this.$refs.scoreInput.value)
-        if (isNaN(pointNum)) {
-          alert('Score must be a non-zero, positive, or negative number.')
-        } else {
-          this.addRound(pointNum)
-        }
-        this.$refs.scoreInput.value = null
-        this.$emit('totalsUpdated')
+    scoreEntryKeyUp () {
+      const pointNum = Number(this.$refs.scoreInput.value)
+      if (isNaN(pointNum) || pointNum === 0) {
+        alert('Score must be a non-zero, positive, or negative number.')
+      } else {
+        this.addRound(pointNum)
       }
+      this.$refs.scoreInput.value = null
+      this.$emit('totalsUpdated')
     },
     deleteScoreItem (itemIndex) {
       this.rounds.splice(itemIndex, 1)
