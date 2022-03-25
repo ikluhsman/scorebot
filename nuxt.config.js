@@ -45,9 +45,14 @@ export default {
         content: 'https://scorebot.app/'
       },
       {
-        hid: 'fb:appid',
+        hid: 'fb:app_id',
         property: 'fb:app_id',
         content: 'ScoreBot.app'
+      },
+      {
+        hid: 't-type',
+        name: 'twitter:card',
+        content: 'summary_large_image'
       }
     ],
     link: [
