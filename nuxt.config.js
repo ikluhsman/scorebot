@@ -25,6 +25,11 @@ export default {
         content: 'Scorebot is an app for keeping score of many different games.'
       },
       {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'ScoreBot'
+      },
+      {
         hid: 'og:type',
         property: 'og:type',
         content: 'website'
