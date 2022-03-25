@@ -15,32 +15,32 @@ export default {
       { hid: 'scorebot.app', name: 'ScoreBot', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
       {
-        hid: 'og-title',
+        hid: 'og:title',
         property: 'og:title',
         content: 'ScoreBot'
       },
       {
-        hid: 'og-description',
+        hid: 'og:description',
         property: 'og:description',
         content: 'Scorebot is an app for keeping score of many different games.'
       },
       {
-        hid: 'og-type',
+        hid: 'og:type',
         property: 'og:type',
         content: 'website'
       },
       {
-        hid: 'og-image',
+        hid: 'og:image',
         property: 'og:image',
         content: 'https://scorebot.app/splash.jpg'
       },
       {
-        hid: 'og-url',
+        hid: 'og:url',
         property: 'og:url',
         content: 'https://scorebot.app/'
       },
       {
-        hid: 'fb-appid',
+        hid: 'fb:appid',
         property: 'fb:app_id',
         content: 'ScoreBot.app'
       }
