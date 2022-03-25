@@ -10,7 +10,7 @@ export default {
       jsonData = JSON.parse(b)
     }
     return {
-      jsonData, 
+      jsonData,
       id: query.id
     }
   },
@@ -52,5 +52,6 @@ export default {
         }
       ]
     }
+  }
 }
 </script>
