@@ -33,7 +33,7 @@ export default {
         {
           hid: 'og:description',
           property: 'og:description',
-          content: 'Scorebot is an app for keeping score of card games, darts, dominoes, dice, or any other game where you keep a basic running total of points. It is easy to use on a tablet or cell phone at the game table.'
+          content: 'Scorebot is an app for keeping score of many different games.'
         },
         {
           hid: 'og:type',
@@ -43,7 +43,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://scorebot.app/splash.jpg'
+          content: 'https://scorebot.netlify.app/splash.jpg'
         },
         {
           hid: 'og:url',

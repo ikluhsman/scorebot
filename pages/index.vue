@@ -32,7 +32,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: '/splash.jpg'
+          content: 'https://scorebot.netlify.app/splash.jpg'
         },
         {
           hid: 'og:url',
