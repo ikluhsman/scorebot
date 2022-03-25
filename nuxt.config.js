@@ -56,8 +56,30 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    icon: {
+      source: '/icon.png'
+    },
+    meta: {
+      name: 'ScoreBot',
+      author: 'Ian Kluhsman',
+      description: 'Track scores for many games.',
+      lang: 'en',
+      ogType: 'website',
+      ogSiteName: 'ScoreBot',
+      ogTitle: 'ScoreBot',
+      ogDescription: 'Track scores for many games.',
+      ogHost: 'https://scorebot.app',
+      ogImage: 'icon.png'
+
+    },
     manifest: {
-      lang: 'en'
+      name: 'ScoreBot',
+      id: '/?standalone=true',
+      shortName: 'ScoreBot',
+      description: 'Track scores for many games.',
+      lang: 'en',
+      useWebManifestExtension: false,
+      background_color: '#000000'
     }
   },
 
