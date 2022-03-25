@@ -1,8 +1,7 @@
 body {
-    @apply text-amber-50 text-lg bg-black m-0;
-    letter-spacing: 0.025em;
-    font-family: mono45-headline,monospace;
-    font-weight: 500;
+    @apply text-amber-50 text-lg bg-black m-0 tracking-wider;
+    font-family: BebasNeue-Regular, sans-serif;
+    font-weight: 600;
     font-style: normal;
 }
 a {
@@ -16,5 +15,10 @@ a {
 }
 
 input {
-    @apply border border-amber-50 bg-transparent pl-2 rounded-md;
+    @apply border border-amber-50 bg-transparent pl-2 rounded-md font-bold tracking-widest;
+}
+
+@font-face {
+    font-family: "BebasNeue-Regular";
+    src: local("BebasNeue"), url('~assets/fonts/BebasNeue-Regular.ttf') format('truetype')
 }
