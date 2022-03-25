@@ -22,7 +22,7 @@ export default {
       {
         hid: 'og:description',
         property: 'og:description',
-        content: 'Scorebot is an app for keeping score of many different games.'
+        content: 'ScoreBot is an app for keeping score of many different games.'
       },
       {
         hid: 'og:site_name',
@@ -53,6 +53,21 @@ export default {
         hid: 'twitter:image',
         name: 'twitter:image',
         content: 'https://scorebot.app/screen.jpg'
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content: 'ScoreBot is an app for keeping score of many different games.'
+      },
+      {
+        hid: 'twitter:title',
+        name: 'twitter:title',
+        content: 'ScoreBot'
+      },
+      {
+        hid: 'twitter:creator',
+        name: 'twitter:creator',
+        content: '@iankco'
       }
     ],
     link: [
