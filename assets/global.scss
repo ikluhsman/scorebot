@@ -3,7 +3,7 @@ body {
     font-family: BebasNeue-Regular, sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-display: swap;
+    
 }
 a {
     @apply text-lime-300;
@@ -22,4 +22,5 @@ input {
 @font-face {
     font-family: "BebasNeue-Regular";
     src: local("BebasNeue"), url('~assets/fonts/BebasNeue-Regular.ttf') format('truetype')
+    font-display: swap;
 }
