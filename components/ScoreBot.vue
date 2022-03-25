@@ -144,7 +144,7 @@ export default {
       const scoresJson = JSON.stringify(scoredata)
       const buff = Buffer.from(scoresJson)
       const b64 = buff.toString('base64')
-      const url = 'http://localhost:3000/scores?id=' + b64
+      const url = 'https://scorebot.app/scores?id=' + b64
       if (redirect) {
         this.$router.push({ path: '/scores', query: { id: b64 } })
       }
