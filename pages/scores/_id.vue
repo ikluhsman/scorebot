@@ -43,12 +43,12 @@ export default {
         {
           hid: 'og-image',
           property: 'og:image',
-          content: 'https://scorebot.netlify.app/splash.jpg'
+          content: 'https://scorebot.app/splash.jpg'
         },
         {
           hid: 'og-url',
           property: 'og:url',
-          content: 'https://scorebot.app'
+          content: 'https://scorebot.app/'
         }
       ]
     }

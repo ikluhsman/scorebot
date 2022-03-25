@@ -37,7 +37,7 @@ export default {
         {
           hid: 'og-url',
           property: 'og:url',
-          content: 'https://scorebot.app'
+          content: 'https://scorebot.app/'
         }
       ]
     }
