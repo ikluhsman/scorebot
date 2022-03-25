@@ -46,7 +46,7 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/pound.svg' },
+      { rel: 'icon', type: 'image/x-icon', href: '/hash.ico' },
       {
         hid: 'canonical',
         rel: 'canonical',
