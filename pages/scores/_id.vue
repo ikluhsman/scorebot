@@ -43,7 +43,7 @@ export default {
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://scorebot.app/splash.jpg'
+          content: 'https://scorebot.app/screen.jpg'
         },
         {
           hid: 'og:url',
