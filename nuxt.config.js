@@ -38,6 +38,11 @@ export default {
         hid: 'og-url',
         property: 'og:url',
         content: 'https://scorebot.app/'
+      },
+      {
+        hid: 'fb-appid',
+        property: 'fb:app_id',
+        content: 'ScoreBot.app'
       }
     ],
     link: [
