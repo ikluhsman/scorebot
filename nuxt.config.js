@@ -45,9 +45,14 @@ export default {
         content: 'https://scorebot.app/'
       },
       {
-        hid: 't-type',
+        hid: 'twitter:card',
         name: 'twitter:card',
         content: 'summary_large_image'
+      },
+      {
+        hid: 'twitter:image',
+        name: 'twitter:image',
+        content: 'https://scorebot.app/screen.jpg'
       }
     ],
     link: [
