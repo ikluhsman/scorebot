@@ -1,189 +1,115 @@
 <template>
-  <div class="mt-12 h-screen">
-    <score-board
-      :key="'scoreBoard'"
-      :players="players"
-      :goal="goal"
-      :game="game"
-      :datetime="datetime"
-      @updateGoal="updateGoal"
-      @updateGame="updateGame"
-    />
-    <div class="flex flex-wrap justify-center mb-4 gap-2 flex-grow-0">
-      <player-score-card
-        v-for="(p, k) in players"
-        :ref="'playerScoreCard' + k"
+  <div class="flex flex-col gap-2 pt-4">
+    <div class="flex flex-col items-center">
+      <div class="h-2 mb-2">
+        <svg v-show="total >= goal && goal !== 0 && goal !== null" style="width:16px;height:16px" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
+        </svg>
+      </div>
+      <div class="text-center px-1">
+        <div v-if="playerEdit" class=" flex flex-nowrap">
+          <input
+            ref="playerTextBox"
+            v-model="newPlayerName"
+            v-focus
+            v-click-outside="updatePlayer"
+            class="bg-gray-800 text-amber-50 w-20 text-left"
+            @keyup.enter="updatePlayer"
+          >
+          <button class="p-1" @click="$emit('removePlayer', playerIndex)">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+          </button>
+        </div>
+        <span v-else :id="'player-' + playerIndex + '-span'" class="whitespace-nowrap text-sm sm:text-lg" @click="editPlayer">{{ player.name }}</span>
+      </div>
+      <div :class="isLeader ? 'w-full text-center border-gray-500 border-solid border rounded-md text-lime-300 bg-lime-600' : 'w-full text-center border-gray-500 border-solid border rounded-md text-lime-300'">
+        {{ total }}
+      </div>
+    </div>
+    <div class="bg-black flex flex-nowrap flex-col items-center">
+      <div class="text-center w-full">
+        <input
+          :id="'score-' + player.name"
+          ref="scoreInput"
+          class="w-full bg-gray-900/80 text-lime-300"
+          autocomplete="off"
+          type="text"
+          @keyup.enter="scoreEntryKeyUp"
+        ></input>
+      </div>
+      <score-item
+        v-for="(r,k) in player.scores"
         :key="k"
-        :player-name="p"
-        :player-index="k"
-        :goal="goal"
-        class="w-1/6"
-        @totalsUpdated="updateTotals"
-        @updatePlayer="updatePlayer"
-        @removePlayer="removePlayer"
+        :ref="'scoreItem' + k"
+        class="px-2 w-full"
+        :item-index="k"
+        :value="r"
+        @deletePlayerScore="deletePlayerScore"
       />
     </div>
-    <reset-dialog v-if="showResetDialog" @closeModal="closeResetDialog" />
-    <share-dialog v-if="showShareDialog" :link="saveLink" @closeModal="closeShareDialog" />
   </div>
 </template>
 <script>
-import moment from 'moment'
 export default {
   props: {
-    jsonData: {
+    player: {
       type: Object,
-      default: null
+      required: true
+    },
+    playerIndex: {
+      type: Number,
+      required: true
+    },
+    goal: {
+      type: Number,
+      required: true
     }
   },
   data () {
-    const datetime = moment().format('M/D/YYYY hh:mm')
-    const game = 'New Game'
-    const goal = 0
-    const players = []
-    const totals = []
     return {
-      datetime,
-      game,
-      players,
-      goal,
-      totals,
-      maxplayers: 40,
-      showResetDialog: false,
-      showShareDialog: false,
-      saveLink: null
+      playerEdit: false,
+      newPlayerName: null,
+      isLeader: false
     }
   },
   computed: {
-
-  },
-  created () {
-    if (this.jsonData != null) {
-      this.datetime = this.jsonData.datetime
-      this.game = this.jsonData.game
-      this.jsonData.players.forEach((p) => {
-        this.players.push(p)
-      })
-      this.goal = this.jsonData.goal
-    }
-  },
-  mounted () {
-    if (this.jsonData != null) {
-      if (this.jsonData.scores.length > 0) {
-        this.jsonData.scores.forEach((s, k) => {
-          s.forEach((score) => {
-            this.$refs['playerScoreCard' + k][0].rounds.push(score)
-          })
+    total () {
+      let points = 0
+      if (this.player.scores && this.player.scores.length > 0) {
+        this.player.scores.forEach((p) => {
+          points = points + p
         })
       }
+      return points
     }
-    this.updateTotals()
   },
   methods: {
-    closeResetDialog (response) {
-      this.showResetDialog = false
-      if (response) {
-        this.datetime = moment().format('M/D/YYYY hh:mm')
-        this.goal = 0
-        this.players = []
-        this.game = 'New Game'
-        this.$router.push('/')
-      }
+    editPlayer () {
+      this.newPlayerName = this.player.name
+      this.playerEdit = true
     },
-    closeShareDialog () {
-      this.showShareDialog = false
-    },
-    updateGoal (value) {
-      const pointNum = Number(value)
-      if (!pointNum && pointNum !== 0) {
-        const alertMsg = 'Score must be a non-zero, positive, or negative number.'
-        alert(alertMsg)
+    scoreEntryKeyUp () {
+      const pointNum = Number(this.$refs.scoreInput.value)
+      if (isNaN(pointNum) || pointNum === 0) {
+        alert('Score must be a non-zero, positive, or negative number.')
       } else {
-        this.goal = pointNum
+        this.$emit('addPlayerScore', this.playerIndex, pointNum)
       }
+      this.$refs.scoreInput.value = null
+
+      this.$emit('updateTotals')
     },
-    updateGame (value) {
-      if (value !== this.game) {
-        this.game = value
+    deletePlayerScore (itemIndex) {
+      this.$emit('deletePlayerScore', this.playerIndex, itemIndex)
+      this.$emit('updateTotals')
+    },
+    updatePlayer (e) {
+      if (e.target.id !== 'player-' + this.playerIndex + '-span') {
+        this.$emit('updatePlayer', this.playerIndex, this.newPlayerName)
+        this.playerEdit = false
       }
-    },
-    updateTotals () {
-      if (this.players) {
-        this.totals = []
-        this.players.forEach((p, k) => {
-          const sc = this.$refs['playerScoreCard' + k]
-          if (sc) {
-            this.totals.push(sc[0].total)
-          }
-        })
-        this.updateLeaders()
-      }
-    },
-    updateLeaders () {
-      const max = Math.max(...this.totals)
-      if (max === 0) { return null }
-      for (let i = 0; i < this.totals.length; i++) {
-        this.$refs['playerScoreCard' + i][0].isLeader = false
-        if (this.totals[i] === max) {
-          this.$refs['playerScoreCard' + i][0].isLeader = true
-        }
-      }
-    },
-    save (redirect) {
-      const scores = []
-      this.players.forEach((p, k) => {
-        const sc = this.$refs['playerScoreCard' + k]
-        scores.push(sc[0].rounds)
-      })
-      if (scores.length === 0) {
-        alert('No players on the board. Add players to the board first.')
-        return false
-      }
-      const scoredata = {
-        datetime: this.datetime,
-        game: this.game,
-        players: this.players,
-        goal: this.goal,
-        scores
-      }
-      const scoresJson = JSON.stringify(scoredata)
-      const buff = Buffer.from(scoresJson)
-      const b64 = buff.toString('base64')
-      const url = 'http://localhost:3000/scores?id=' + b64
-      if (redirect) {
-        this.$router.push({ path: '/scores', query: { id: b64 } })
-      }
-      return { url, b64 }
-    },
-    share () {
-      this.saveLink = this.save(false)
-      if (this.saveLink !== false) {
-        this.showShareDialog = true
-      }
-    },
-    reset () {
-      this.showResetDialog = true
-    },
-    addPlayer () {
-      if (this.players.length === this.maxplayers) {
-        alert('Max of 40 players.')
-        return
-      }
-      const newPlayer = 'Player' + this.players.length
-      this.players.push(newPlayer)
-    },
-    updatePlayer (playerIndex, newPlayerName) {
-      this.players[playerIndex] = newPlayerName
-      this.updateTotals()
-      console.log(this.players)
-    },
-    removePlayer (playerIndex) {
-      this.players.splice(playerIndex, 1)
-      this.updateTotals()
-      this.players.forEach((p, k) => {
-        const sc = this.$refs['playerScoreCard' + k]
-        console.log(sc[0].playerName, sc[0].player, sc[0].playerIndex, sc[0].rounds)
-      })
     }
   }
 }

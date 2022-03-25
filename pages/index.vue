@@ -1,3 +1,3 @@
 <template>
-  <score-card />
+  <score-bot />
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <score-card ref="scoreCard" :key="'scoreCard'" :json-data="jsonData" />
+  <score-bot ref="scoreBot" :key="'scoreBot'" :json-data="jsonData" />
 </template>
 <script>
 export default {
@@ -10,7 +10,6 @@ export default {
       jsonData = JSON.parse(b)
     }
     return {
-      route1: query,
       jsonData
     }
   }

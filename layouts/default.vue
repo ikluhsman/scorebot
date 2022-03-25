@@ -11,7 +11,7 @@ export default {
       this.$refs.nuxtComponent.$children[0].$children[0].addPlayer()
     },
     save (redirect) {
-      this.$refs.nuxtComponent.$children[0].$children[0].save(redirect) //  nuxt component > pages / index.vue > score-card
+      this.$refs.nuxtComponent.$children[0].$children[0].save(redirect) //  nuxt component > pages / index.vue
     },
     share () {
       this.$refs.nuxtComponent.$children[0].$children[0].share()

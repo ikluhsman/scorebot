@@ -1,14 +1,9 @@
 <template>
-  <div class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-start items-center bg-black z-100">
-    <button id="lb-button-close" @click="close">
-      <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
-      </svg>
-    </button>
+  <div class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-start items-center bg-black z-50">
     <div class="sc-modal text-center h-screen w-screen p-0 flex justify-center items-center bg-black">
       <div class="sc-card">
         <p class="text-lg">
-          Remove player {{ player }}
+          Remove player {{ playerName }}
         </p>
         <div class="sc-buttons">
           <button class="text-lime-500" @click="yes">
@@ -29,7 +24,7 @@
 <script>
 export default {
   props: {
-    player: {
+    playerName: {
       type: String,
       required: true
     }

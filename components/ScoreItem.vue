@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     deleteButtonClick () {
-      this.$emit('deleteScoreItem', this.itemIndex)
+      this.$emit('deletePlayerScore', this.itemIndex)
     },
     itemClick (e) {
       this.isSelected = !this.isSelected
