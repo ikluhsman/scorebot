@@ -60,5 +60,7 @@ There are obvious issues with how this works, and this kind of saving of the sco
 
 * If a data back-end is implemented, it is likely a serverless solution would be used to either store the json payload directly or use the base64 string with a reference ID used in the URL that would load each record. Most likely platform would be firebase or something similar that would be on a free tier.
 * Google user login to associate saved games with a user, so users can get back to their games easily. Consider other platform logins such as iCloud or Microsoft Live.
+* Remove the Tailwind CSS framework and use vanilla CSS, Tailwind was used for quick prototyping during the build of the project.
+
 
 
