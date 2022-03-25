@@ -36,8 +36,17 @@ export default {
     '@nuxtjs/tailwindcss'
   ],
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/sitemap'
   ],
+  sitemap: {
+    hostname: 'https://scorebot.app',
+    gzip: true,
+    exclude: [],
+    routes: [
+      '/scores'
+    ]
+  },
   pwa: {
     icon: {
       source: '/icon.png'
