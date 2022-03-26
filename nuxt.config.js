@@ -37,7 +37,7 @@ export default {
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'https://scorebot.app/scorebot.jpg'
+        content: 'https://scorebot.app/scorebot.jpg?1234'
       },
       {
         hid: 'og:url',
