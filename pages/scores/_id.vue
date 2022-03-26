@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>{{ players }}</p>
     <score-bot ref="scoreBot" :key="'scoreBot'" :json-data="jsonData" />
   </div>
 </template>
