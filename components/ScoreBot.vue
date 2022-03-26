@@ -28,6 +28,7 @@
     <reset-dialog v-if="showResetDialog" @closeModal="closeResetDialog" />
     <share-dialog v-if="showShareDialog" :link="saveLink" @closeModal="closeShareDialog" />
     <remove-player-dialog v-if="showRemovePlayerDialog" :player-name="selectedPlayer.name" @closeModal="closeRemovePlayerDialog" />
+    <load-dialog v-if="showLoadDialog" @closeModal="closeLoadDialog" />
   </div>
 </template>
 <script>
@@ -52,6 +53,7 @@ export default {
       maxplayers: 40,
       showResetDialog: false,
       showShareDialog: false,
+      showLoadDialog: false,
       showRemovePlayerDialog: false,
       saveLink: null,
       selectedPlayer: null,
@@ -110,6 +112,9 @@ export default {
     closeShareDialog () {
       this.showShareDialog = false
     },
+    closeLoadDialog () {
+      this.showLoadDialog = false
+    },
     updateGoal (value) {
       const pointNum = Number(value)
       if (!pointNum && pointNum !== 0) {
@@ -144,7 +149,7 @@ export default {
       const scoresJson = JSON.stringify(scoredata)
       const buff = Buffer.from(scoresJson)
       const b64 = buff.toString('base64')
-      const url = 'https://scorebot.app/scores?id=' + b64
+      const url = 'https://' + location.host + '/scores?id=' + b64
       if (redirect) {
         this.$router.push({ path: '/scores', query: { id: b64 } })
       }
@@ -155,6 +160,9 @@ export default {
       if (this.saveLink !== false) {
         this.showShareDialog = true
       }
+    },
+    load () {
+      this.showLoadDialog = true
     },
     reset () {
       this.showResetDialog = true
