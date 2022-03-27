@@ -1,19 +1,37 @@
 <template>
-  <div id="load-dialog" ref="loadDialog" v-click-outside="clickOutside" class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center bg-gray-900/50">
-    <div class="sc-modal w-full p-0 flex justify-center items-center">
-      <div class="sc-card w-3/4 flex flex-col">
-        <button @click="close">
-          <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+  <div id="load-dialog" ref="loadDialog" class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center bg-gray-900/50">
+    <div v-click-outside="clickOutside" class="sc-modal w-5/6 p-0 flex justify-center items-center">
+      <div class="sc-card w-5/6 flex flex-col">
+        <svg style="width:32px;height:32px" viewBox="0 0 24 24">
+          <g>
             <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-          </svg>
-        </button>
-        <div class="share-link bg-black h-96 shadow-lime-500/50 shadow-md border-t-4 border-lime-500/50 rounded-t-lg p-1 flex flex-col">
-          <textarea ref="linkTextArea" v-model="link" v-focus placeholder="Enter URL" class="whitespace-normal break-all truncate h-full bg-transparent border-none overflow-auto outline-none resize-none shadow-none" />
-          <button class="rounded-md place-self-end mt-2" @click="goClick">
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <rect
+              class="btn cursor-pointer"
+              fill="transparent"
+              x="0"
+              y="0"
+              width="32"
+              height="32"
+              @click="close"
+            />
+          </g>
+        </svg>
+        <div class="share-link bg-black md:h-64 shadow-lime-500/50 shadow-md border-t-4 border-lime-500/50 rounded-t-lg p-1 flex flex-col">
+          <textarea ref="linkTextArea" v-model="link" v-focus placeholder="Enter URL" class="p-1 whitespace-normal break-all h-full bg-transparent border-none overflow-scroll outline-none resize-none shadow-none" />
+          <svg class="place-self-end" style="width:32px;height:32px" viewBox="0 0 24 24">
+            <g>
               <path fill="currentColor" d="M12,8V4L20,12L12,20V16H4V8H12Z" />
-            </svg>
-          </button>
+              <rect
+                class="btn cursor-pointer"
+                fill="transparent"
+                x="0"
+                y="0"
+                width="32"
+                height="32"
+                @click="goClick"
+              />
+            </g>
+          </svg>
         </div>
       </div>
     </div>

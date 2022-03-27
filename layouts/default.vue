@@ -2,7 +2,6 @@
   <div>
     <nav-bar @save="save" @share="share" @addPlayer="addPlayer" @resetClick="reset" @load="load" />
     <nuxt ref="nuxtComponent" />
-    <page-footer />
   </div>
 </template>
 <script>

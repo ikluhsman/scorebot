@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-12 h-screen">
+  <div>
     <score-board
       :key="'scoreBoard'"
       :players="players"
@@ -9,7 +9,7 @@
       @updateGoal="updateGoal"
       @updateGame="updateGame"
     />
-    <div class="flex flex-wrap justify-center mb-4 gap-2 flex-grow-0">
+    <div class="flex flex-wrap justify-around mb-4 gap-2 px-16">
       <score-card
         v-for="(p, k) in players"
         :ref="'playerScoreCard' + k"
@@ -17,7 +17,7 @@
         :player="p"
         :player-index="k"
         :goal="goal"
-        class="w-1/6"
+        class="max-w-min"
         @updateTotals="updateLeaders"
         @updatePlayer="updatePlayer"
         @removePlayer="openRemovePlayerDialog"
@@ -181,8 +181,12 @@ export default {
     },
     openRemovePlayerDialog (playerIndex) {
       this.selectedPlayer = this.players[playerIndex]
-      this.selectedIndex = playerIndex
-      this.showRemovePlayerDialog = true
+      if (this.selectedPlayer.scores.length > 0) {
+        this.selectedIndex = playerIndex
+        this.showRemovePlayerDialog = true
+      } else {
+        this.closeRemovePlayerDialog(true)
+      }
     },
     closeRemovePlayerDialog (response) {
       if (response) {
