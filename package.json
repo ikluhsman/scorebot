@@ -16,6 +16,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/sitemap": "^2.4.0",
     "core-js": "^3.19.3",
+    "gsap": "^3.9.1",
     "nuxt": "^2.15.8",
     "nuxt-clipboard2": "^0.2.1",
     "vue": "^2.6.14",

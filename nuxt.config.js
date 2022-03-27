@@ -83,7 +83,8 @@ export default {
     '@/assets/global.scss'
   ],
   plugins: [
-    { src: '~/plugins/directives' }
+    { src: '~/plugins/directives' },
+    { src: '~/plugins/gsap', ssr: false }
   ],
   components: {
     dirs: [
