@@ -39,7 +39,7 @@
           @keyup.enter="scoreEntryKeyUp"
         ></input>
       </div>
-      <score-item
+      <score-card-item
         v-for="(r,k) in player.scores"
         :key="k"
         :ref="'scoreItem' + k"
