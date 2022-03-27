@@ -112,6 +112,8 @@ export default {
       this.$router.push({ path: '/scores', query: { id: this.b64 } })
     },
     linkIsValid () {
+      // trim any whitespace
+      this.link = this.link.trim()
       // check for null values, the url, and id parameter
       if (this.link === null || this.link === '' || !this.link.indexOf('https://' + location.host + '/scores?id=') === 0) {
         return false
