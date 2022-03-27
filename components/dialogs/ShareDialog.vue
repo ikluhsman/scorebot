@@ -17,8 +17,8 @@
           </g>
         </svg>
         <div class="share-link bg-black md:h-64 shadow-lime-500/50 shadow-md border-t-4 border-lime-500/50 rounded-t-lg p-4 flex flex-col justify-between">
-          <textarea class="p-1 whitespace-normal break-all h-full bg-transparent border-none outline-none resize-none shadow-none overflow-scroll" v-text="link.url" />
-          <div class="flex cursor-pointer py-1">
+          <textarea class="p-1 whitespace-normal break-all h-full bg-transparent border-none outline-none resize-none shadow-none overflow-auto" v-text="link.url" />
+          <div class="flex cursor-pointer py-2">
             <svg class="cursor-pointer" style="width:28px;height:28px" viewBox="0 0 24 24">
               <g>
                 <path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />

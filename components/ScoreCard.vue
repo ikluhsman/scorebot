@@ -1,7 +1,7 @@
 <template>
-  <div class="pt-4 text-center">
-    <div class="h-2 mb-2">
-      <svg v-show="total >= goal && goal !== 0 && goal !== null" style="width:20px;height:20px" viewBox="0 0 24 24">
+  <div class="pt-4">
+    <div class="h-4 mb-4 flex justify-center">
+      <svg v-show="isWinner" style="width:28px;height:28px" viewBox="0 0 24 24">
         <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z" />
       </svg>
     </div>
@@ -80,6 +80,9 @@ export default {
         })
       }
       return points
+    },
+    isWinner () {
+      return this.total >= this.goal && this.goal !== 0 && this.goal !== null
     }
   },
   methods: {

@@ -17,21 +17,23 @@
           </g>
         </svg>
         <div class="share-link bg-black md:h-64 shadow-lime-500/50 shadow-md border-t-4 border-lime-500/50 rounded-t-lg p-1 flex flex-col">
-          <textarea ref="linkTextArea" v-model="link" v-focus placeholder="Enter URL" class="p-1 whitespace-normal break-all h-full bg-transparent border-none overflow-scroll outline-none resize-none shadow-none" />
-          <svg class="place-self-end" style="width:32px;height:32px" viewBox="0 0 24 24">
-            <g>
-              <path fill="currentColor" d="M12,8V4L20,12L12,20V16H4V8H12Z" />
-              <rect
-                class="btn cursor-pointer"
-                fill="transparent"
-                x="0"
-                y="0"
-                width="32"
-                height="32"
-                @click="goClick"
-              />
-            </g>
-          </svg>
+          <textarea ref="linkTextArea" v-model="link" v-focus placeholder="Enter URL" class="p-1 whitespace-normal break-all h-full bg-transparent border-none overflow-auto outline-none resize-none shadow-none" />
+          <div class="p-2 place-self-end">
+            <svg style="width:32px;height:32px" viewBox="0 0 24 24">
+              <g>
+                <path fill="currentColor" d="M12,8V4L20,12L12,20V16H4V8H12Z" />
+                <rect
+                  class="btn cursor-pointer"
+                  fill="transparent"
+                  x="0"
+                  y="0"
+                  width="32"
+                  height="32"
+                  @click="goClick"
+                />
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
   <div>
     <score-board
       :key="'scoreBoard'"
+      ref="scoreBoard"
       :players="players"
       :goal="goal"
       :game="game"
@@ -9,6 +10,21 @@
       @updateGoal="updateGoal"
       @updateGame="updateGame"
     />
+    <div :class="scoreBoardToggle ? 'w-full flex justify-center bg-gray-900' : 'w-full flex justify-center'">
+      <svg class="hover:cursor-pointer" style="width:28px;height:28px" viewBox="0 0 24 24">
+        <g>
+          <path fill="currentColor" :d="scoreBoardToggle ? 'M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z' : 'M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z'" />
+          <rect
+            fill="transparent"
+            x="0"
+            y="0"
+            width="32"
+            height="32"
+            @click="toggleScoreBoard"
+          />
+        </g>
+      </svg>
+    </div>
     <div class="flex flex-wrap justify-around mb-4 gap-2 px-16">
       <score-card
         v-for="(p, k) in players"
@@ -57,7 +73,8 @@ export default {
       showRemovePlayerDialog: false,
       saveLink: null,
       selectedPlayer: null,
-      selectedIndex: -1
+      selectedIndex: -1,
+      scoreBoardToggle: false
     }
   },
   created () {
@@ -72,8 +89,15 @@ export default {
   },
   mounted () {
     this.updateLeaders()
+    if (this.jsonData === null) {
+      this.toggleScoreBoard()
+    }
   },
   methods: {
+    toggleScoreBoard () {
+      this.scoreBoardToggle = !this.scoreBoardToggle
+      this.$refs.scoreBoard.toggle(this.scoreBoardToggle)
+    },
     updateLeaders () {
       const totals = []
       if (this.players) {
