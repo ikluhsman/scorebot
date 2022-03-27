@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-start items-center bg-black z-50">
+  <div class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-start items-center bg-black">
     <div class="sc-modal text-center h-screen w-screen p-0 flex justify-center items-center bg-black">
       <div class="sc-card">
         <p class="text-lg">

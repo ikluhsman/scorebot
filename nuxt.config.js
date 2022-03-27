@@ -97,7 +97,8 @@ export default {
   ],
   modules: [
     '@nuxtjs/pwa',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    'nuxt-clipboard2'
   ],
   sitemap: {
     hostname: 'https://scorebot.app',
@@ -134,5 +135,8 @@ export default {
       background_color: '#000000'
     }
   },
-  build: {}
+  build: {},
+  server: {
+    host: process.env.NODE_ENV !== 'production' ? '172.30.2.40' : ''
+  }
 }

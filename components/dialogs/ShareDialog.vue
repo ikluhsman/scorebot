@@ -1,5 +1,5 @@
 <template>
-  <div id="share-dialog" v-click-outside="clickOutside" class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center bg-gray-900/50 z-100">
+  <div id="share-dialog" v-click-outside="clickOutside" class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center bg-gray-900/50">
     <div class="sc-modal w-full p-0 flex justify-center items-center">
       <div class="sc-card w-5/6 flex flex-col">
         <button @click="close">
@@ -11,12 +11,21 @@
           <p class="whitespace-normal break-all truncate">
             {{ link.url }}
           </p>
-          <div class="flex" @click="copyToClipboard">
-            <button>
-              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+          <div class="flex cursor-pointer">
+            <svg class="cursor-pointer" style="width:24px;height:24px" viewBox="0 0 24 24">
+              <g>
                 <path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
-              </svg>
-            </button>
+                <rect
+                  class="btn"
+                  fill="transparent"
+                  x="0"
+                  y="0"
+                  width="24"
+                  height="24"
+                  @click="copyToClipboard"
+                />
+              </g>
+            </svg>
             <span class="ml-4">{{ message }}</span>
           </div>
         </div>
@@ -34,7 +43,7 @@ export default {
   },
   data () {
     return {
-      message: 'Copy Link'
+      message: ''
     }
   },
   methods: {
@@ -47,10 +56,16 @@ export default {
       this.$emit('closeModal')
       this.$router.push({ path: '/scores', query: { id: this.link.b64 } })
     },
-    copyToClipboard () {
-      navigator.clipboard.writeText(this.link.url).then(() => {
-        this.message = 'Copied that!'
-      })
+    async copyToClipboard () {
+      console.log(this.link.url)
+
+      try {
+        await this.$copyText(this.link.url).then(() => {
+          this.message = 'Copied that!'
+        })
+      } catch (e) {
+        this.message(e)
+      }
     }
   }
 }

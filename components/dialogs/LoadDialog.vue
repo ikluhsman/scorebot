@@ -1,5 +1,5 @@
 <template>
-  <div id="load-dialog" ref="loadDialog" v-click-outside="clickOutside" class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center bg-gray-900/50 z-100">
+  <div id="load-dialog" ref="loadDialog" v-click-outside="clickOutside" class="sc-overlay fixed top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center bg-gray-900/50">
     <div class="sc-modal w-full p-0 flex justify-center items-center">
       <div class="sc-card w-3/4 flex flex-col">
         <button @click="close">
