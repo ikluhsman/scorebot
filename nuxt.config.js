@@ -111,7 +111,7 @@ export default {
   },
   pwa: {
     icon: {
-      source: '/icon.png'
+      source: '/sbicon.png'
     },
     meta: {
       name: 'ScoreBot',
