@@ -111,7 +111,7 @@ export default {
   },
   pwa: {
     icon: {
-      source: '/icon.png'
+      source: '/icon1.png'
     },
     meta: {
       name: 'ScoreBot',
@@ -123,8 +123,7 @@ export default {
       ogTitle: 'ScoreBot',
       ogDescription: 'Track scores for many games.',
       ogHost: 'https://scorebot.app',
-      ogImage: 'icon.png'
-
+      ogImage: 'icon1.png'
     },
     manifest: {
       name: 'ScoreBot',
