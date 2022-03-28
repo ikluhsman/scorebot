@@ -20,8 +20,8 @@ export default {
         content:
           'ScoreBot is an app for keeping score of many different games.'
       },
-      // { name: "msapplication-TileColor", content: "#ffffff" },
-      // { name: "msapplication-TileImage", content: "/ms-icon-144x144.png" },
+      { name: 'msapplication-TileColor', content: '#ffffff' },
+      { name: 'msapplication-TileImage', content: '/icon.png' },
       { hid: 'name', itemprop: 'name', content: 'ScoreBot' },
 
       {
