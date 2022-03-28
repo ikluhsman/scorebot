@@ -71,7 +71,7 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/hash6576.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         hid: 'canonical',
         rel: 'canonical',
@@ -111,7 +111,7 @@ export default {
   },
   pwa: {
     icon: {
-      source: '/sbicon.png'
+      source: '/icon.png'
     },
     meta: {
       name: 'ScoreBot',
