@@ -71,7 +71,7 @@ export default {
       }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/hash.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/hash6576.ico' },
       {
         hid: 'canonical',
         rel: 'canonical',

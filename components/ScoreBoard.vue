@@ -18,7 +18,7 @@
       </a>
       <span class="text-sm text-gray-500 pl-2">All Materials &copy; {{ new Date().getFullYear() }} Ian Kluhsman</span>
     </div>
-    <div id="score-board-grid" class="grid grid-cols-2">
+    <div id="score-board-grid" class="grid grid-cols-2 px-2">
       <div>
         <span>{{ datetime }}</span>
         <div @click="editGame = true">
