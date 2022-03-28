@@ -15,6 +15,33 @@ export default {
       { hid: 'scorebot.app', name: 'ScoreBot', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
       {
+        hid: 'description',
+        name: 'description',
+        content:
+          'ScoreBot is an app for keeping score of many different games.'
+      },
+      // { name: "msapplication-TileColor", content: "#ffffff" },
+      // { name: "msapplication-TileImage", content: "/ms-icon-144x144.png" },
+      { hid: 'name', itemprop: 'name', content: 'ScoreBot' },
+
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content:
+          'ScoreBot, Score, Bot, Game Scores, Scoring, Score App, Score Keeping, Score Keeper'
+      },
+      {
+        hid: 'description',
+        itemprop: 'description',
+        content:
+          'ScoreBot is an app for keeping score of many different games.'
+      },
+      {
+        hid: 'image',
+        itemprop: 'image',
+        content: 'https://scorebot.app/og-image-large.jpg'
+      },
+      {
         hid: 'og:title',
         property: 'og:title',
         content: 'ScoreBot'
@@ -37,6 +64,11 @@ export default {
       {
         hid: 'og:image',
         property: 'og:image',
+        content: 'https://scorebot.app/og-image-large.jpg'
+      },
+      {
+        hid: 'og:image:url',
+        property: 'og:image:url',
         content: 'https://scorebot.app/og-image-large.jpg'
       },
       {
@@ -68,7 +100,8 @@ export default {
         hid: 'twitter:creator',
         name: 'twitter:creator',
         content: '@iankco'
-      }
+      },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@iankco' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -104,7 +137,7 @@ export default {
   sitemap: {
     hostname: 'https://scorebot.app',
     gzip: true,
-    exclude: [],
+    exclude: ['/.git'],
     routes: [
       '/scores'
     ]
@@ -128,6 +161,7 @@ export default {
     manifest: {
       name: 'ScoreBot',
       id: '/?standalone=true',
+      display: 'standalone',
       shortName: 'ScoreBot',
       description: 'Track scores for many games.',
       lang: 'en',
