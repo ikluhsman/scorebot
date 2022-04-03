@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col items-center">
     <score-board
       :key="'scoreBoard'"
       ref="scoreBoard"
@@ -25,7 +25,7 @@
         </g>
       </svg>
     </div>
-    <div class="flex flex-wrap justify-around mb-4 gap-2 px-16">
+    <div class="flex flex-wrap justify-center mb-8 gap-8">
       <score-card
         v-for="(p, k) in players"
         :ref="'playerScoreCard' + k"
